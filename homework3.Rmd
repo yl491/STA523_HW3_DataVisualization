@@ -35,7 +35,7 @@ ggplot(FacultyPercent,aes(x=year,y=percent))+
   geom_line(aes(x=year,y=percent,group=ftype,color=ftype), linetype="dashed")+
   geom_point(size=1, alpha=0.5)+
   ggtitle("Trends in faculty employment")+
-  xlab('Year') +ylab('Percentage of faculty')
+  xlab('Year') +ylab('Percentage of faculty(%)')
 ```
 
 
