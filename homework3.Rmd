@@ -1,0 +1,41 @@
+---
+title: "GGPlot"
+author: "Team 9"
+date: "9/28/2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(readr)
+homework3 <- read_csv("part_1/homework3.csv")
+```
+
+## Create a data frame
+
+```{r}
+colnames(homework3)[1]="Faculty type"
+FacultyPercent <-matrix(nrow=55,ncol=3,data=NA)
+FacultyPercent[,1]<-rep(homework3$`Faculty type`,11)
+FacultyPercent[,2]<-c(sapply(colnames(homework3)[-1],function(x) {rep(x,5)}))
+FacultyPercent[,3] <- c(sapply(homework3[,-1],print))
+FacultyPercent<-as.data.frame(FacultyPercent)
+colnames(FacultyPercent)=c("ftype","year","percent")
+FacultyPercent$percent=as.double(as.character(FacultyPercent$percent))
+```
+
+## Drawing Plots
+
+
+```{r}
+ggplot(FacultyPercent,aes(x=year,y=percent))+
+  geom_line(aes(x=year,y=percent,group=ftype,color=ftype), linetype="dashed")+
+  geom_point(size=1, alpha=0.5)+
+  ggtitle("Trends in faculty employment")+
+  xlab('Year') +ylab('Percentage of faculty')
+```
+
+
