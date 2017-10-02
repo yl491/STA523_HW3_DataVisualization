@@ -11,4 +11,4 @@ You should also be prepared to present on your design choices (2-3 mins) during 
 
 ### Part 2 - Due by 11:59 pm on Monday October 9th.
 
-More details to follow.
+See `part_2/hw3_part_2.Rmd` for details.
