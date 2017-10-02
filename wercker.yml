@@ -1,0 +1,13 @@
+box: rocker/hadleyverse
+
+build:
+  steps:
+    - script:
+        name: Check for allowed files
+        code: |
+          Rscript -e "source('https://raw.githubusercontent.com/Sta523-Fa17/hw3/master/hw3_whitelist.R')"
+    - script:
+        name: Render R markdown
+        code: |
+          cd part_2/
+          Rscript -e "library(rmarkdown);render('hw3_part_2.Rmd')"
