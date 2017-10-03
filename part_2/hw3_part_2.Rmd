@@ -64,6 +64,8 @@ For each of the variables you selected answer the following question: What are s
 
 <!-- Write up here -->
 ```{r}
+#income, age, gender?
+
 ```
 
 
@@ -75,6 +77,9 @@ Select and design two different plots that visualize the relationship between th
 
 
 ```{r plot1}
+library(ggplot2)
+ggplot(na.omit(acs12),aes(x=age,y=income))+geom_line(aes(x=age,y=income,group=as.factor(gender),color=as.factor(gender)), linetype="dashed")
+#too bad. think of defining income to be categorical? set different levels of income? say <$10,000, $10,001~20,000 etc..
 ```
 
 ```{r plot2}
