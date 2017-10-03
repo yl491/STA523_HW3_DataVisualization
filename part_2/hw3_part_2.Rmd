@@ -65,6 +65,34 @@ For each of the variables you selected answer the following question: What are s
 <!-- Write up here -->
 ```{r}
 #income, age, gender?
+library(dplyr)
+acs12%>%
+  mutate(level_income=income)
+acs12$level_income[acs12$income>=100000]<-"extremely high"
+acs12$level_income[acs12$income<100000& acs12$income>=50000]<-"high"
+acs12$level_income[acs12$income<50000& acs12$income>=23600]<-"above mean"
+acs12$level_income[acs12$income<23600& acs12$income>=3000]<-"below mean"
+acs12$level_income[acs12$income<3000]<-"low"
+# set up different levels of income?
+# plz simplify the above lines if possible..
+acs12$age_group<-acs12$age
+acs12$age_group[acs12$age_group>=60]<-"over 60"
+acs12$age_group[acs12$age_group<60& acs12$age_group>=45]<-"45~60"
+acs12$age_group[acs12$age_group<45& acs12$age_group>=30]<-"30~45"
+acs12$age_group[acs12$age_group<30& acs12$age_group>=18]<-"18~30"
+acs12$age_group[acs12$age_group<18]<-"below 18"
+
+
+
+# or shall we calculate the average income for each age group?
+
+
+
+acs12 %>% 
+  select(level_income,gender,age_group) %>%
+  group_by(gender,level_income,age_group) %>%
+  summarize(number = n()) 
+#show how many individuals falls in each group(group by gender, level of income and age)
 
 ```
 
