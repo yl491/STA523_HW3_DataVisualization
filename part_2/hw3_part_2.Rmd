@@ -92,7 +92,7 @@ acs12 %>%
   select(level_income,gender,age_group) %>%
   group_by(gender,level_income,age_group) %>%
   summarize(number = n()) 
-#show how many individuals falls in each group(group by gender, level of income and age)
+#show how many individuals falls in each group(group by gender, level of income and age)YL
 
 ```
 
@@ -107,7 +107,11 @@ Select and design two different plots that visualize the relationship between th
 ```{r plot1}
 library(ggplot2)
 ggplot(na.omit(acs12),aes(x=age,y=income))+geom_line(aes(x=age,y=income,group=as.factor(gender),color=as.factor(gender)), linetype="dashed")
-#too bad. think of defining income to be categorical? set different levels of income? say <$10,000, $10,001~20,000 etc..
+#too bad. think of defining income to be categorical? set different levels of income? say <$10,000, $10,001~20,000 etc..YL
+
+#maybe boxplots for each combination of gender*age_group?? -YL
+ggplot(na.omit(acs12),aes(x=age_group,y=income))+geom_boxplot(aes(x=age_group,y=income,group=as.factor(age_group)))
+#hmmm, this doesnt show the difference between gender...
 ```
 
 ```{r plot2}
