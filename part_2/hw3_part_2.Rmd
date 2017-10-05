@@ -66,33 +66,34 @@ For each of the variables you selected answer the following question: What are s
 ```{r}
 #income, age, gender?
 library(dplyr)
-acs12%>%
-  mutate(level_income=income)
-acs12$level_income[acs12$income>=100000]<-"extremely high"
-acs12$level_income[acs12$income<100000& acs12$income>=50000]<-"high"
-acs12$level_income[acs12$income<50000& acs12$income>=23600]<-"above mean"
-acs12$level_income[acs12$income<23600& acs12$income>=3000]<-"below mean"
-acs12$level_income[acs12$income<3000]<-"low"
-# set up different levels of income?
-# plz simplify the above lines if possible..
+#acs12%>%
+#  mutate(level_income=income)
+#acs12$level_income[acs12$income>=100000]<-"extremely high"
+#acs12$level_income[acs12$income<100000& acs12$income>=50000]<-"high"
+#acs12$level_income[acs12$income<50000& acs12$income>=23600]<-"above mean"
+#acs12$level_income[acs12$income<23600& acs12$income>=3000]<-"below mean"
+#cs12$level_income[acs12$income<3000]<-"low"
+
 acs12$age_group<-acs12$age
-acs12$age_group[acs12$age_group>=60]<-"over 60"
-acs12$age_group[acs12$age_group<60& acs12$age_group>=45]<-"45~60"
-acs12$age_group[acs12$age_group<45& acs12$age_group>=30]<-"30~45"
-acs12$age_group[acs12$age_group<30& acs12$age_group>=18]<-"18~30"
+acs12$age_group[acs12$age_group>=65]<-"over 60"
+acs12$age_group[acs12$age_group<65& acs12$age_group>=45]<-"45~60"
+acs12$age_group[acs12$age_group<45& acs12$age_group>=25]<-"30~45"
+acs12$age_group[acs12$age_group<25& acs12$age_group>=18]<-"18~30"
 acs12$age_group[acs12$age_group<18]<-"below 18"
+#PLZ simplify the above lines if possible - YL
 
 
 
-# or shall we calculate the average income for each age group?
+acs12_sub<-acs12[acs12$income!=0,]
+p<-quantile(acs12$income,probs=0.75,na.rm=TRUE)
+acs12_top25<-acs12[acs12$income>p,]
 
+j<-acs12_top25 %>% 
+  select(gender,age_group) %>%
+  group_by(gender,age_group) %>%
+  summarize(num111 = n()) %>%
+  na.omit()
 
-
-acs12 %>% 
-  select(level_income,gender,age_group) %>%
-  group_by(gender,level_income,age_group) %>%
-  summarize(number = n()) 
-#show how many individuals falls in each group(group by gender, level of income and age)YL
 
 ```
 
@@ -106,15 +107,13 @@ Select and design two different plots that visualize the relationship between th
 
 ```{r plot1}
 library(ggplot2)
-ggplot(na.omit(acs12),aes(x=age,y=income))+geom_line(aes(x=age,y=income,group=as.factor(gender),color=as.factor(gender)), linetype="dashed")
-#too bad. think of defining income to be categorical? set different levels of income? say <$10,000, $10,001~20,000 etc..YL
-
-#maybe boxplots for each combination of gender*age_group?? -YL
-ggplot(na.omit(acs12),aes(x=age_group,y=income))+geom_boxplot(aes(x=age_group,y=income,group=as.factor(age_group)))
-#hmmm, this doesnt show the difference between gender...
+ggplot(na.omit(acs12_sub),aes(x=age_group,y=log(income)))+geom_boxplot(aes(x=age_group,y=log(income),fill=gender))
+#Title, Y-axis, legend, color to be improved 
 ```
 
 ```{r plot2}
+ggplot(na.omit(j),aes(x=age_group,y=num111,fill=gender))+geom_bar(stat = "identity")
+#Title, Y-axis, legend, color to be improved 
 ```
 
 
@@ -124,8 +123,11 @@ ggplot(na.omit(acs12),aes(x=age_group,y=income))+geom_boxplot(aes(x=age_group,y=
 
 What two plot types have you selected? What are some of the properties of these plots, and how do those properties match with your variables of interest?
 
-<!-- Write up here -->
 
+<!-- Write up here -->
+\
+Answer: We selected boxplot and bar graph. Properties of boxplot: show the distribution of data (mean, quantile, outliers). Properties of bar graph: show the numbers of cases within each group. We want to look at how income varies with gender and age, so the boxplot is a perfect fit for this purpose; as for the bar graph, we chose it because we want to look at among the top 25% person that have highest incomes, how many males and females are there in each age group.
+#This is just a draft answer. Feel free to add things - YL
 
 <br/>
 
@@ -133,6 +135,10 @@ What two plot types have you selected? What are some of the properties of these 
 
 <i>Think of who the target audience might be for your plots. What task(s) should users of each plot be able to undertake? Why are these tasks important for these variables?</i>
 
+\
+Answer: The target audience for the bar graph may be those who are interested in the inequality that exists in the income of males and females. The target audience for the boxplot may be those who wants to generally learn the over all distribution of income across gender and age.\
+tasks?
+#What does task refer to here YL
 <!-- Write up here -->
 
 <br/>
@@ -150,7 +156,9 @@ What two plot types have you selected? What are some of the properties of these 
 <i>What type of audience did you intend the plots for? What types of skills does this audience bring to the understanding of your plots? What elements of your plots might be difficult for the audience to understand, and how do you justify the choices you have made about those elements?</i>
 
 <!-- Write up here -->
+
 ```{r}
+#maybe justify the reason we use log(income)?
 ```
 
 <br/>
