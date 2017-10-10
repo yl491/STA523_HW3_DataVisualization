@@ -10,4 +10,4 @@ build:
         name: Render R markdown
         code: |
           cd part_2/
-          Rscript -e "library(rmarkdown);render('hw3_part_2.Rmd')"
+          Rscript -e "library(rmarkdown);install.packages('openintro', repos='https://cran.rstudio.com/');render('hw3_part_2.Rmd')"
