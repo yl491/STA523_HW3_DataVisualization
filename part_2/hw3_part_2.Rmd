@@ -180,9 +180,9 @@ The structure of the stacked bar graph clearly lets users compare the relative r
 
 <i>What type of audience did you intend the plots for? What types of skills does this audience bring to the understanding of your plots? What elements of your plots might be difficult for the audience to understand, and how do you justify the choices you have made about those elements?</i>
 
-Both of these plots are intended for those with public policy interest but little background in formal statistics. This audience should be familiar with the summary information contained in the comparative boxplots and thus should be able to use them to draw inferences about the differences in the distribution of income across age groups, by gender. Little to no requiste knowledge of statistics is needed in order to glean information regarding the top quartile of earners from the stacked bar graph
+Both of these plots are intended for those with public policy interest but little background in formal statistics. This audience should be familiar with the summary information contained in the comparative boxplots and thus should be able to use them to draw inferences about the differences in the distribution of income across age groups, by gender. Little to no requiste knowledge of statistics is needed in order to glean information regarding the top quartile of earners from the stacked bar graph.
 
 We did not group by gender and then subset by age as the resulting visualizaiton did not display the information as clearly as grouping by age group then subsetting by gender. 
-As mentioned previously, we chose to use log(income) instead of income because the range of income from the sample was too broad -- without transforming income it would be hard to remove outliers or to figure out the patterns.
+As mentioned previously, we chose to use log(income) instead of income because the range of income from the sample was too broad -- without transforming income it would be hard to remove outliers or to discern patterns in the data.
 
 <br/>
