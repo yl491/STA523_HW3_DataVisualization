@@ -1,7 +1,6 @@
 ---
 title: "Homework 3 - Part 2"
 output:
-  pdf_document: default
   html_document:
     theme: cerulean
 date: 'Due: Oct 9th by 11:59 pm'
